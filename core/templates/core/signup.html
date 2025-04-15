@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sign up{% endblock title %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-r from-teal-400 to-green-500 dark:from-gray-800 dark:to-gray-900">
+    <div class="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl transform transition-all duration-500 hover:scale-105">
+        <h1 class="text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">Sign up</h1>
+
+        <form action="" method="post" class="space-y-4">
+            {% csrf_token %}
+            
+            <!-- Username Field -->
+            <div class="relative">
+                <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
+                {{ form.username }}
+                <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400">
+                    <i class="fas fa-user"></i>
+                </span>
+            </div>
+
+           
+
+            <!-- Email Field -->
+            <div class="relative">
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                {{ form.email }}
+                <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400">
+                    <i class="fas fa-envelope"></i>
+                </span>
+            </div>
+            
+
+            <!-- Password Field -->
+            <div class="relative">
+                <label for="password1" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                {{ form.password1 }}
+                <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="relative">
+                <label for="password2" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirm Password</label>
+                {{ form.password2 }}
+                <span class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </div>
+
+            <!-- Error Messages -->
+            {% if form.errors or form.non_field_errors %}
+                <div class="p-4 bg-red-100 dark:bg-red-500 text-red-700 dark:text-white rounded-lg">
+                    {% for field in form %}
+                        {{ field.errors }}
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <!-- Submit Button -->
+            <button class="w-full py-3 px-6 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105">
+                Sign Up
+            </button>
+        </form>
+
+        <!-- Additional Links -->
+        <div class="mt-6 text-center">
+            <a href="{% url 'core:login' %}" class="text-sm text-teal-500 hover:text-teal-600 dark:text-teal-400 dark:hover:text-teal-300">
+                Already have an account? Login
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

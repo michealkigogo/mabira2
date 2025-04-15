@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+
+{% block title %}New Conversation{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <h1 class="mb-6 text-3xl font-bold text-center text-teal-600">New Conversation</h1>
+
+    <form action="" method="POST" class="space-y-4">
+        {% csrf_token %}
+
+        <!-- Chat-like message area -->
+        <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="space-y-4">
+                {{ form.as_p }}
+            </div>
+        </div>
+
+        <!-- Error messages -->
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-4 bg-red-100 rounded-lg text-red-600">
+                {% for field in form %}
+                    {{ field.errors }}
+                {% endfor %}
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <!-- Send button -->
+        <button class="w-full py-3 px-6 text-lg bg-teal-500 hover:bg-teal-600 rounded-full text-white font-semibold transition duration-300">
+            Send
+        </button>
+    </form>
+</div>
+{% endblock %}

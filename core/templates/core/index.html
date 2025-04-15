@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Welcome{% endblock title %}
+
+{% block content %}
+    <div class="mt-6 sm:px-6 px-3 w-full py-12 dark:text-white dark:bg-gray-800 bg-gray-100 rounded-xl shadow-xl">
+        <h2 class="md:mb-12 mb-3 font-medium text-2xl text-center">Trending Items</h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-stretch gap-6">
+            {% for item in items %}
+                <div class="shadow-lg hover:shadow-xl transition-shadow duration-300 h-fit rounded-lg bg-white dark:bg-gray-900 overflow-hidden">
+                    <a href="{% url 'item:detail' item.id %}" class="block">
+                        <!-- Image Section -->
+                        <div class="aspect-square flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+                            {% if item.image %}
+                                <img src="{{ item.image.url }}" class="w-full h-full object-cover" alt="Product image">
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center text-gray-500">
+                                    No image available
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Content Section -->
+                        <div class="p-4 flex flex-col gap-2">
+                            <h2 class="text-lg font-semibold break-words">{{ item.name }}</h2>
+                            <p class="text-lg font-bold text-gray-900 dark:text-white">Ugsh {{ item.price }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ item.category }}</p>
+                            
+                            <!-- Add Prime Badge -->
+                            <div class="flex items-center">
+                                <span class="text-sm text-blue-600 dark:text-blue-400">mabira</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mt-6 sm:px-6 px-3 py-12 bg-gray-100 dark:bg-gray-900 dark:text-white rounded-xl shadow-xl">
+        <h2 class="mb-12 text-2xl text-center font-medium">Categories</h2>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 sm:gap-6 gap-4">
+            {% for category in categories %}
+                <div class="shadow-lg hover:shadow-xl transition-shadow duration-300 h-fit rounded-lg overflow-hidden">
+                    <a href="{% url 'item:items' %}?category={{ category.id }}" class="block">
+                        <div class="p-6 bg-white dark:bg-gray-800 flex flex-wrap sm:justify-between justify-center">
+                            <div>
+                                <h2 class="text-lg font-semibold break-words">{{ category.name }}</h2>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">{{ category.items.count }} items</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

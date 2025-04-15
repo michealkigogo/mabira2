@@ -1,0 +1,122 @@
+/* LOGIN FORM */
+
+.login {
+    background: var(--darkened-bg);
+    height: 100vh; /* Full height for the login page */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login #header {
+    height: auto;
+    padding: 20px 16px;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--body-bg);
+    border-bottom: 1px solid var(--hairline-color);
+}
+
+.login #header h1 {
+    font-size: 1.5rem; /* Larger font size for the header */
+    margin: 0;
+    font-weight: bold;
+    color: var(--header-color);
+}
+
+.login #header h1 a {
+    color: var(--header-link-color);
+    text-decoration: none; /* Remove underline from the link */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.login #header h1 a:hover {
+    color: var(--link-hover-color); /* Change color on hover */
+}
+
+.login #content {
+    padding: 30px 25px; /* Increased padding for better spacing */
+    background: var(--body-bg);
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+.login #container {
+    background: var(--body-bg);
+    border: 1px solid var(--hairline-color);
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px; /* Slightly wider for better readability */
+    margin: 0 auto; /* Center the container */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+.login .form-row {
+    padding: 10px 0; /* Increased padding for better spacing */
+}
+
+.login .form-row label {
+    display: block;
+    line-height: 1.5;
+    font-size: 0.9rem;
+    color: var(--body-quiet-color);
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+.login .form-row #id_username,
+.login .form-row #id_password {
+    padding: 12px; /* Increased padding for better input field appearance */
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--hairline-color);
+    border-radius: 4px; /* Rounded corners for input fields */
+    font-size: 1rem;
+    color: var(--body-fg);
+    background-color: var(--body-bg);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth focus effect */
+}
+
+.login .form-row #id_username:focus,
+.login .form-row #id_password:focus {
+    border-color: var(--body-quiet-color);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Add focus shadow */
+}
+
+.login .submit-row {
+    padding: 20px 0 10px 0; /* Increased padding for better spacing */
+    margin: 0;
+    text-align: center;
+}
+
+.login .submit-row input[type="submit"] {
+    background-color: var(--primary); /* Use primary color for the button */
+    color: white;
+    padding: 12px 24px; /* Larger padding for a bigger button */
+    border: none;
+    border-radius: 4px; /* Rounded corners for the button */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.login .submit-row input[type="submit"]:hover {
+    background-color: var(--primary-dark); /* Darker shade on hover */
+}
+
+.login .password-reset-link {
+    text-align: center;
+    margin-top: 15px; /* Space above the reset link */
+}
+
+.login .password-reset-link a {
+    color: var(--link-fg);
+    text-decoration: none; /* Remove underline from the link */
+    font-size: 0.9rem;
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.login .password-reset-link a:hover {
+    color: var(--link-hover-color); /* Change color on hover */
+}

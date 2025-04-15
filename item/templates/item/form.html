@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-6 text-3xl dark:text-white text-center">{{ title }}</h1>
+
+<form action="" method="POST" enctype="multipart/form-data" id="item-form">
+    {% csrf_token %}
+    <div class="flex flex-col items-center justify-center dark:text-black">
+        <div class="space-y-4 flex flex-col justify-center dark:text-white md:w-1/2 dark:bg-gray-800 p-6 rounded-xl shadow-xl">
+            {{ form.as_p }}
+
+            <!-- Add Payment Options -->
+            <div class="mb-4">
+                <label for="payment_plan" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Boost an your</label>
+                <select name="payment_plan" id="payment_plan" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+                    <option value="" disabled selected>Choose a payment plan</option>
+                    <option value="free">Free</option>
+                    <option value="basic">Basic Plan(5000 per 7 days)</option>
+                    <option value="premium">Premium(60,000 per month)</option>
+                </select>
+            </div>
+
+            {% if form.errors or form.non_field_errors %}
+                <div class="mb-3 p-6 bg-red-100 dark:bg-red-500 rounded-xl">
+                    {% for field in form %}
+                        {{ field.errors }}
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <button type="submit" class="mt-6 w-full py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-3xl text-white">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.getElementById('item-form').addEventListener('submit', function(event) {
+        const paymentPlan = document.getElementById('payment_plan').value;
+
+        if (!paymentPlan) {
+            alert('Please select a payment plan.');
+            event.preventDefault(); // Prevent form submission
+        } else if (paymentPlan !== 'free') {
+            event.preventDefault(); // Prevent form submission for non-free plans
+            const paymentAmount = paymentPlan === 'basic' ? 5000 : 60000; // Amounts in UGX
+            const confirmPayment = confirm(`You have selected the ${paymentPlan} plan. Proceed to pay UGX ${paymentAmount.toLocaleString()}?`);
+
+            if (confirmPayment) {
+                // Redirect to payment gateway or payment page
+                window.location.href = `/payment/?plan=${paymentPlan}&amount=${paymentAmount}`;
+            }
+        }
+        // If payment plan is free, the form will submit normally
+    });
+</script>
+
+{% endblock content %}
